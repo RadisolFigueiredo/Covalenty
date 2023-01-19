@@ -56,6 +56,7 @@ export const BoxCarousel = styled.div`
   display: flex;
   justify-content: center;
   background-color: #28696a;
+  width: 100%;
 `;
 
 export const WidthCarousel = styled.div`
