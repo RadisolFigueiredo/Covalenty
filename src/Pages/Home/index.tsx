@@ -1,4 +1,5 @@
 import { Search, ShoppingBagOutlined } from '@mui/icons-material';
+
 import * as S from './styles';
 
 const Home = () => {
