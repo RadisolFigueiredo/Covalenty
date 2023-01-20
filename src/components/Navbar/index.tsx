@@ -73,8 +73,8 @@ const Navbar = ({ options }: any) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {options.map((item: any) => (
-          <MenuItem>{item.name}</MenuItem>
+        {options?.map((item: any) => (
+          <MenuItem key={item.id}>{item.name}</MenuItem>
         ))}
       </Menu>
     </>

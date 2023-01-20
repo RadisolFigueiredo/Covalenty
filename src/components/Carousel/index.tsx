@@ -84,7 +84,7 @@ const Carousel = ({ categories }: CategoryProps) => {
               disabled={activeStep === maxSteps - 1}
               style={{ color: '#213058' }}
             >
-              Next
+              Próximo
               {theme.direction === 'rtl' ? (
                 <KeyboardArrowLeft />
               ) : (
@@ -104,7 +104,7 @@ const Carousel = ({ categories }: CategoryProps) => {
               ) : (
                 <KeyboardArrowLeft />
               )}
-              Back
+              Voltar
             </Button>
           }
         />

@@ -68,7 +68,7 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        height: '50vh',
+        height: '300px',
         backgroundColor: '#28696a',
         width: '100%',
         display: 'flex',
@@ -92,11 +92,12 @@ const Footer = () => {
             justifyContent: 'space-around',
             height: '80%',
             marginTop: '30px',
+            alignItems: 'center'
           }}
         >
           <Box
             sx={{
-              height: '20vh',
+              height: '200px',
               display: 'flex',
               flexDirection: 'column',
             }}
@@ -105,7 +106,7 @@ const Footer = () => {
               Menu
             </Typography>
             {menuFooter.map((item) => (
-              <Link href="#" variant="body2" underline="none" color="#ffffff">
+              <Link key={item.id} href="#" variant="body2" underline="none" color="#ffffff">
                 {item.text}
               </Link>
             ))}
@@ -114,14 +115,14 @@ const Footer = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              height: '20vh',
+              height: '200px',
             }}
           >
             <Typography color="#ffffff" mb={2} variant="body1">
               Políticas
             </Typography>
             {politicasFooter.map((item) => (
-              <Link href="#" variant="body2" underline="none" color="#ffffff">
+              <Link key={item.id} href="#" variant="body2" underline="none" color="#ffffff">
                 {item.text}
               </Link>
             ))}
@@ -129,7 +130,7 @@ const Footer = () => {
           <Box
             sx={{
               display: 'flex',
-              height: '20vh',
+              height: '200px',
 
               flexDirection: 'column',
             }}
@@ -154,11 +155,11 @@ const Footer = () => {
             height: '20%',
             width: '100%',
             display: 'flex',
-            alignItems: 'flex-end',
+            alignItems: 'center',
             justifyContent: 'end',
           }}
         >
-          <Typography paddingRight={5} paddingBottom={1} color={'#ffffff'}>
+          <Typography paddingRight={5} color={'#ffffff'}>
             Copyright © 2023
           </Typography>
         </Box>

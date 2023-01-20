@@ -1,17 +1,16 @@
 import { useEffect, useState } from 'react';
 
-import { Search, ShoppingBagOutlined } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
 import { Category } from '../../types/category';
 
-import Navbar from '../../components/Navbar';
 import Carousel from '../../components/Carousel';
 
 import * as S from './styles';
 import Footer from '../../components/Footer';
 import CardCircle from '../../components/Cards/CardCircle';
+import Header from '../../components/Header';
 
 const Home = () => {
   const [categories, setCategories] = useState<Category[] | any>();
@@ -41,43 +40,7 @@ const Home = () => {
 
   return (
     <>
-      <Box
-        sx={{
-          height: '30px',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#f0e6d7',
-        }}
-      >
-        <Typography variant="body1">Frete Grátis para todo Brasil</Typography>
-      </Box>
-      <S.Container>
-        <S.BoxAlign>
-          <Typography color="#ffffff" variant="h4">
-            Logo
-          </Typography>
-        </S.BoxAlign>
-
-        <S.ContainerSearch>
-          <S.BoxSearch>
-            <S.BoxSearchIcon>
-              <Search style={{ color: '#ffffff' }} />
-            </S.BoxSearchIcon>
-          </S.BoxSearch>
-        </S.ContainerSearch>
-
-        <S.BoxAlign>
-          <ShoppingBagOutlined />
-        </S.BoxAlign>
-      </S.Container>
-
-      <S.ContainerNavbar display="flex" justifyContent="center" alignItems={'center'}>
-        <Box width="70%">
-          <Navbar options={categories} />
-        </Box>
-      </S.ContainerNavbar>
+      <Header categories={categories} />
 
       <S.ContainerCarousel>
         <S.BoxCarousel>
@@ -116,9 +79,9 @@ const Home = () => {
               flexWrap: 'wrap',
             }}
           >
-            {categories?.map((item: any) => {
-              return <CardCircle item={item} />;
-            })}
+            {categories?.map((item: any) => (
+              <CardCircle key={item.id} item={item} />
+            ))}
           </Box>
         </Box>
       </Box>
