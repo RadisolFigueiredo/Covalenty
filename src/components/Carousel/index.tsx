@@ -16,12 +16,12 @@ import * as S from './styles';
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 type CategoryProps = {
-  categories: Category[];
+  categories?: Category[];
 };
 const Carousel = ({ categories }: CategoryProps) => {
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
-  const maxSteps = categories?.length;
+  const maxSteps = 5;
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -44,31 +44,33 @@ const Carousel = ({ categories }: CategoryProps) => {
           onChangeIndex={handleStepChange}
           enableMouseEvents
         >
-          {categories?.map((step: Category, index: number) => (
-            <div key={step.name}>
-              {Math.abs(activeStep - index) <= 2 ? (
-                <>
-                  <Box
-                    borderRadius={3}
-                    component="img"
-                    sx={{
-                      height: 300,
-                      display: 'block',
-                      overflow: 'hidden',
-                      width: '100%',
-                    }}
-                    src={step.image}
-                    alt={step.name}
-                  />
-                  <S.BoxText m={2} width={'40%'}>
-                    <Typography variant="h4" color="#213058">
-                      {categories[activeStep].name}
-                    </Typography>
-                  </S.BoxText>
-                </>
-              ) : null}
-            </div>
-          ))}
+          {categories?.map((step: Category, index: number) => {
+            return (
+              <div key={step.id}>
+                {Math.abs(activeStep - index) <= 2 ? (
+                  <>
+                    <Box
+                      borderRadius={3}
+                      component="img"
+                      sx={{
+                        height: 300,
+                        display: 'block',
+                        overflow: 'hidden',
+                        width: '100%',
+                      }}
+                      src={step.image}
+                      alt={step.name}
+                    />
+                    <S.BoxText m={2} width={'40%'}>
+                      <Typography variant="h4" color="#213058">
+                        {categories[activeStep]?.name}
+                      </Typography>
+                    </S.BoxText>
+                  </>
+                ) : null}
+              </div>
+            );
+          })}
         </AutoPlaySwipeableViews>
         <MobileStepper
           style={{ backgroundColor: '#28696a' }}

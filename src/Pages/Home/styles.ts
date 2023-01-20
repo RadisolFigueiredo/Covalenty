@@ -5,7 +5,7 @@ export const Container = styled.div`
   display: flex;
   background-color: #28696a;
   justify-content: space-around;
-  height: 60px;
+  height: 100px;
 `;
 
 export const BoxAlign = styled.div`
@@ -44,6 +44,7 @@ export const BoxSearchIcon = styled.div`
 
 export const ContainerNavbar = styled(Box)`
   background-color: #f0e6d7;
+  height: 60px;
 `;
 
 export const ContainerCarousel = styled.div`

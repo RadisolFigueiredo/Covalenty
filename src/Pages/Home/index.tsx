@@ -10,22 +10,24 @@ import Navbar from '../../components/Navbar';
 import Carousel from '../../components/Carousel';
 
 import * as S from './styles';
+import Footer from '../../components/Footer';
+import CardCircle from '../../components/Cards/CardCircle';
 
 const Home = () => {
   const [categories, setCategories] = useState<Category[] | any>();
 
-  const getProducts = async () => {
-    try {
-      const response = await api.get('products');
-      console.log('PRODUTOS', response.data);
-    } catch (error) {
-      console.log('ERROR:', error);
-    }
-  };
+  // const getProducts = async () => {
+  //   try {
+  //     const response = await api.get('products');
+  //     // console.log('PRODUTOS', response.data);
+  //   } catch (error) {
+  //     console.log('ERROR:', error);
+  //   }
+  // };
 
   const getCategories = async () => {
     try {
-      const response = await api.get('categories');
+      const response = await api.get(`categories?limit=5`);
       setCategories(response.data);
     } catch (error) {
       console.log('ERROR:', error);
@@ -33,15 +35,29 @@ const Home = () => {
   };
 
   useEffect(() => {
-    getProducts();
+    // getProducts();
     getCategories();
-  });
+  }, []);
 
   return (
     <>
+      <Box
+        sx={{
+          height: '30px',
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: '#f0e6d7',
+        }}
+      >
+        <Typography variant="body1">Frete Grátis para todo Brasil</Typography>
+      </Box>
       <S.Container>
         <S.BoxAlign>
-          <Typography variant="h4">Logo</Typography>
+          <Typography color="#ffffff" variant="h4">
+            Logo
+          </Typography>
         </S.BoxAlign>
 
         <S.ContainerSearch>
@@ -57,12 +73,12 @@ const Home = () => {
         </S.BoxAlign>
       </S.Container>
 
-      <S.ContainerNavbar display={'flex'} justifyContent={'center'}>
-        <Box display={'flex'} width="70%" justifyContent={'space-between'}>
+      <S.ContainerNavbar display="flex" justifyContent="center" alignItems={'center'}>
+        <Box width="70%">
           <Navbar options={categories} />
         </Box>
       </S.ContainerNavbar>
-      
+
       <S.ContainerCarousel>
         <S.BoxCarousel>
           <S.WidthCarousel>
@@ -70,6 +86,43 @@ const Home = () => {
           </S.WidthCarousel>
         </S.BoxCarousel>
       </S.ContainerCarousel>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          sx={{
+            width: '70%',
+            flexDirection: 'column',
+          }}
+        >
+          <Typography
+            display="flex"
+            justifyContent="center"
+            my={5}
+            variant="h4"
+          >
+            Categorias
+          </Typography>
+
+          <Box
+            sx={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-around',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+            }}
+          >
+            {categories?.map((item: any) => {
+              return <CardCircle item={item} />;
+            })}
+          </Box>
+        </Box>
+      </Box>
+      <Footer />
     </>
   );
 };
