@@ -25,6 +25,7 @@ const Home = () => {
   // };
 
   const getCategories = async () => {
+    
     try {
       const response = await api.get(`categories?limit=5`);
       setCategories(response.data);
