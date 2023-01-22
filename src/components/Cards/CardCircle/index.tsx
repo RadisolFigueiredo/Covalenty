@@ -6,8 +6,33 @@ import {
   CardContent,
   Typography,
 } from '@mui/material';
+import { useContext } from 'react';
+
+import { useNavigate } from 'react-router-dom';
+import CategoryContext from '../../../context/categories';
+import { api } from '../../../services/api';
 
 const CardCircle = ({ item }: any) => {
+  const navigate = useNavigate();
+  const { setAllProductByCategory } = useContext(CategoryContext);
+
+  const getProductsByCategory = async () => {
+    try {
+      const response = await api.get(`categories/${item.id}/products
+      `);
+
+      if (response.status === 200) {
+        setAllProductByCategory(response.data);
+
+        return navigate(`/products/${item.id}`, {
+          state: { category: item, totalProducts: response.data.length },
+        });
+      }
+    } catch (error) {
+      console.log('ERROR:', error);
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -16,7 +41,9 @@ const CardCircle = ({ item }: any) => {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        cursor: 'pointer',
       }}
+      onClick={() => getProductsByCategory()}
     >
       <Card
         sx={{
