@@ -1,13 +1,15 @@
-import { Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+
+import { Box, Typography } from '@mui/material';
+
 import { api } from '../../services/api';
 
 const ProductDetails = () => {
   const location = useLocation();
   const { productId } = location.state;
 
-  const [product, setProduct] = useState<any>([]);
+  const [product, setProduct] = useState<any>({});
 
   const getProductDetail = async () => {
     try {
@@ -23,7 +25,10 @@ const ProductDetails = () => {
 
   useEffect(() => {
     getProductDetail();
-  }, [productId, product]);
+  }, [productId]);
+
+  console.log(!!product);
+  console.log(product);
 
   return (
     <Box
@@ -34,7 +39,7 @@ const ProductDetails = () => {
       pt={10}
     >
       <Box display="flex" flexDirection="row" width="70%">
-        {!!product && (
+        {Object.keys(product).length !== 0 ? (
           <Box display="flex" flexDirection="column">
             <Box display="flex" flexDirection="row">
               <img
@@ -55,7 +60,7 @@ const ProductDetails = () => {
                 </Typography>
               </Box>
             </Box>
-            {product.images.length > 0 && (
+            {product && product.images.length > 0 && (
               <Box display="flex" flexDirection="row">
                 {product.images.map((item: string, index: number) => (
                   <Box
@@ -71,6 +76,10 @@ const ProductDetails = () => {
               </Box>
             )}
           </Box>
+        ) : (
+          <Typography variant="h4">
+            Desculpe, algo deu errado. Tente mais tarde.
+          </Typography>
         )}
       </Box>
     </Box>

@@ -51,17 +51,20 @@ const Carousel = () => {
                     <Box
                       borderRadius={3}
                       component="img"
-                      sx={{
-                        height: 300,
-                        display: 'block',
-                        overflow: 'hidden',
-                        width: '100%',
-                      }}
+                      height="300px"
+                      display="block"
+                      overflow="hidden"
+                      width="100%"
                       src={step.image}
                       alt={step.name}
                     />
                     <S.BoxText m={2} width={'40%'}>
-                      <Typography variant="h4" color="#213058">
+                      <Typography
+                        variant="h4"
+                        color="#ffffff"
+                        fontWeight={700}
+                        fontSize={40}
+                      >
                         {mainCategories[activeStep]?.name}
                       </Typography>
                     </S.BoxText>
@@ -81,7 +84,7 @@ const Carousel = () => {
               size="small"
               onClick={handleNext}
               disabled={activeStep === maxSteps - 1}
-              style={{ color: '#213058' }}
+              style={{ color: '#213058', fontWeight: 'bold' }}
             >
               Próximo
               {theme.direction === 'rtl' ? (
@@ -96,7 +99,7 @@ const Carousel = () => {
               size="small"
               onClick={handleBack}
               disabled={activeStep === 0}
-              style={{ color: '#213058' }}
+              style={{ color: '#213058', fontWeight: 'bold' }}
             >
               {theme.direction === 'rtl' ? (
                 <KeyboardArrowRight />

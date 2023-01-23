@@ -22,9 +22,9 @@ export const ContainerSearch = styled.div`
   display: flex;
   align-items: center;
   width: 70%;
-`;
+  `;
 
-export const BoxSearch = styled.div`
+export const BoxSearch = styled.form`
   display: flex;
   justify-content: flex-end;
   background-color: #ffffff;
@@ -32,6 +32,14 @@ export const BoxSearch = styled.div`
   border-radius: 5px;
   width: 100%;
   height: 40px;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding-left: 5px;
+  font-size: 18px;
+  border: none;
+  outline: 0;
 `;
 
 export const BoxSearchIcon = styled.div`

@@ -20,15 +20,12 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const { setAllProductByCategory } = useContext(CategoryContext);
-
   const handleCategory = async (item: any) => {
     try {
       const response = await api.get(`categories/${item.id}/products
       `);
 
       if (response.status === 200) {
-        setAllProductByCategory(response.data);
         return navigate(`/products/${item.id}`, {
           state: { category: item, totalProducts: response.data.length },
         });
@@ -41,21 +38,21 @@ const Navbar = () => {
   return (
     <>
       <Box
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          textAlign: 'center',
-          width: '100%',
-          justifyContent: 'center',
-        }}
+        display="flex"
+        alignItems="center"
+        textAlign="center"
+        width="100%"
+        justifyContent="center"
       >
         <Link to="/" style={{ textDecoration: 'none', color: '#213058' }}>
-          <Typography sx={{ minWidth: '100px' }}>Início</Typography>
+          <Typography minWidth="100px" fontWeight={700}>
+            Início
+          </Typography>
         </Link>
         <IconButton
           onClick={handleClick}
           size="small"
-          sx={{ ml: 2, color: '#213058' }}
+          sx={{ color: '#213058', ml: 2, fontWeight: 700 }}
           aria-controls={open ? 'account-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
@@ -67,13 +64,15 @@ const Navbar = () => {
           to="/tracking"
           style={{ textDecoration: 'none', color: '#213058' }}
         >
-          <Typography sx={{ minWidth: 100, ml: 5 }}>Rastreamento</Typography>
+          <Typography minWidth={100} ml={5} fontWeight={700}>
+            Rastreamento
+          </Typography>
         </Link>
         <Link
           to="/deliveryTime"
           style={{ textDecoration: 'none', color: '#213058' }}
         >
-          <Typography sx={{ minWidth: 100, ml: 5 }}>
+          <Typography minWidth={100} ml={5} fontWeight={700}>
             Envio e Prazo de Entrega
           </Typography>{' '}
         </Link>
