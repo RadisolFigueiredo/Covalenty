@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -12,13 +12,12 @@ import { autoPlay } from 'react-swipeable-views-utils';
 import { Category } from '../../types/category';
 
 import * as S from './styles';
+import CategoryContext from '../../context/categories';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
-type CategoryProps = {
-  categories?: Category[];
-};
-const Carousel = ({ categories }: CategoryProps) => {
+const Carousel = () => {
+  const { mainCategories } = useContext(CategoryContext);
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = 5;
@@ -44,7 +43,7 @@ const Carousel = ({ categories }: CategoryProps) => {
           onChangeIndex={handleStepChange}
           enableMouseEvents
         >
-          {categories?.map((step: Category, index: number) => {
+          {mainCategories?.map((step: Category, index: number) => {
             return (
               <div key={step.id}>
                 {Math.abs(activeStep - index) <= 2 ? (
@@ -63,7 +62,7 @@ const Carousel = ({ categories }: CategoryProps) => {
                     />
                     <S.BoxText m={2} width={'40%'}>
                       <Typography variant="h4" color="#213058">
-                        {categories[activeStep]?.name}
+                        {mainCategories[activeStep]?.name}
                       </Typography>
                     </S.BoxText>
                   </>

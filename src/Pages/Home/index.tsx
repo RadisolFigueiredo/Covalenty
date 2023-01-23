@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
@@ -6,14 +6,14 @@ import { api } from '../../services/api';
 import { Category } from '../../types/category';
 
 import Carousel from '../../components/Carousel';
+import CardCircle from '../../components/Cards/CardCircle';
 
 import * as S from './styles';
-import Footer from '../../components/Footer';
-import CardCircle from '../../components/Cards/CardCircle';
-import Header from '../../components/Header';
+import CategoryContext from '../../context/categories';
 
 const Home = () => {
-  const [categories, setCategories] = useState<Category[] | any>();
+  const { setMainCategories, mainCategories } = useContext(CategoryContext);
+  // const [categories, setCategories] = useState<Category[] | any>();
 
   // const getProducts = async () => {
   //   try {
@@ -25,10 +25,9 @@ const Home = () => {
   // };
 
   const getCategories = async () => {
-    
     try {
       const response = await api.get(`categories?limit=5`);
-      setCategories(response.data);
+      setMainCategories(response.data);
     } catch (error) {
       console.log('ERROR:', error);
     }
@@ -41,12 +40,10 @@ const Home = () => {
 
   return (
     <>
-      <Header categories={categories} />
-
       <S.ContainerCarousel>
         <S.BoxCarousel>
           <S.WidthCarousel>
-            <Carousel categories={categories} />
+            <Carousel />
           </S.WidthCarousel>
         </S.BoxCarousel>
       </S.ContainerCarousel>
@@ -54,6 +51,7 @@ const Home = () => {
         sx={{
           display: 'flex',
           justifyContent: 'center',
+          height: '50vh',
         }}
       >
         <Box
@@ -80,13 +78,12 @@ const Home = () => {
               flexWrap: 'wrap',
             }}
           >
-            {categories?.map((item: any) => (
+            {mainCategories?.map((item: any) => (
               <CardCircle key={item.id} item={item} />
             ))}
           </Box>
         </Box>
       </Box>
-      <Footer />
     </>
   );
 };

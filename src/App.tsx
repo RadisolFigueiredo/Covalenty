@@ -5,8 +5,9 @@ import GlobalContext from './context';
 import Footer from './components/Footer';
 import Header from './components/Header';
 
-import Categories from './Pages/Categories';
 import Home from './Pages/Home';
+import Categories from './Pages/Categories';
+import Tracking from './Pages/Tracking';
 
 function App() {
   return (
@@ -15,8 +16,11 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/:id" element={<Categories />} />
+        <Route path="/tracking" element={<Tracking />} />
+
+        <Route path="/deliveryTime" element={<Tracking />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </GlobalContext>
   );
 }

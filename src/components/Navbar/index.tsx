@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+import { Link, useNavigate } from 'react-router-dom';
 
 import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import CategoryContext from '../../context/categories';
+import { api } from '../../services/api';
 
-const Navbar = ({ options }: any) => {
+const Navbar = () => {
+  const navigate = useNavigate();
+  const { mainCategories } = useContext(CategoryContext);
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -11,6 +19,25 @@ const Navbar = ({ options }: any) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const { setAllProductByCategory } = useContext(CategoryContext);
+
+  const handleCategory = async (item: any) => {
+    try {
+      const response = await api.get(`categories/${item.id}/products
+      `);
+
+      if (response.status === 200) {
+        setAllProductByCategory(response.data);
+        return navigate(`/products/${item.id}`, {
+          state: { category: item, totalProducts: response.data.length },
+        });
+      }
+    } catch (error) {
+      console.log('ERROR:', error);
+    }
+  };
+
   return (
     <>
       <Box
@@ -22,21 +49,34 @@ const Navbar = ({ options }: any) => {
           justifyContent: 'center',
         }}
       >
-        <Typography sx={{ minWidth: 100 }}>Início</Typography>
+        <Link to="/" style={{ textDecoration: 'none', color: '#213058' }}>
+          <Typography sx={{ minWidth: '100px' }}>Início</Typography>
+        </Link>
         <IconButton
           onClick={handleClick}
           size="small"
-          sx={{ ml: 2 }}
+          sx={{ ml: 2, color: '#213058' }}
           aria-controls={open ? 'account-menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
           Categorias
+          <KeyboardArrowDownIcon />
         </IconButton>
-        <Typography sx={{ minWidth: 100, ml: 5 }}>Rastreamento</Typography>
-        <Typography sx={{ minWidth: 100, ml: 5 }}>
-          Envio e Prazo de Entrega
-        </Typography>
+        <Link
+          to="/tracking"
+          style={{ textDecoration: 'none', color: '#213058' }}
+        >
+          <Typography sx={{ minWidth: 100, ml: 5 }}>Rastreamento</Typography>
+        </Link>
+        <Link
+          to="/deliveryTime"
+          style={{ textDecoration: 'none', color: '#213058' }}
+        >
+          <Typography sx={{ minWidth: 100, ml: 5 }}>
+            Envio e Prazo de Entrega
+          </Typography>{' '}
+        </Link>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -73,8 +113,10 @@ const Navbar = ({ options }: any) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        {options?.map((item: any) => (
-          <MenuItem key={item.id}>{item.name}</MenuItem>
+        {mainCategories?.map((item: any) => (
+          <Box key={item.id} onClick={() => handleCategory(item)}>
+            <MenuItem>{item.name}</MenuItem>
+          </Box>
         ))}
       </Menu>
     </>

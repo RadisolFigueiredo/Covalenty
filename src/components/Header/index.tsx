@@ -1,28 +1,32 @@
 import { Search, ShoppingBagOutlined } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
 import Navbar from '../Navbar';
+
+
 import * as S from './styles';
 
-const Header = ({ categories }: any) => {
+const Header = () => {
   return (
-    <>
+    <Box height="19vh">
       <Box
+        height="30px"
+        width="100%"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
         sx={{
-          height: '30px',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
           backgroundColor: '#f0e6d7',
         }}
       >
-        <Typography variant="body1">Frete Grátis para todo Brasil</Typography>
+        <Typography color="#213058" variant="body1">
+          Frete Grátis para todo Brasil
+        </Typography>
       </Box>
       <S.Container>
-        <S.BoxAlign>
-          <Typography color="#ffffff" variant="h4">
-            Logo
-          </Typography>
+        <S.BoxAlign to={'/'}>
+        <Typography color="#ffffff" variant="h5">
+          Platzi Shop
+        </Typography>
         </S.BoxAlign>
 
         <S.ContainerSearch>
@@ -33,8 +37,8 @@ const Header = ({ categories }: any) => {
           </S.BoxSearch>
         </S.ContainerSearch>
 
-        <S.BoxAlign>
-          <ShoppingBagOutlined />
+        <S.BoxAlign to={'/'}>
+          <ShoppingBagOutlined style={{ color: '#ffffff' }}/>
         </S.BoxAlign>
       </S.Container>
 
@@ -44,10 +48,10 @@ const Header = ({ categories }: any) => {
         alignItems={'center'}
       >
         <Box width="70%">
-          <Navbar options={categories} />
+          <Navbar />
         </Box>
       </S.ContainerNavbar>
-    </>
+    </Box>
   );
 };
 
