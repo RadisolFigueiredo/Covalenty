@@ -5,22 +5,33 @@ import CardBasic from '../../components/Cards/CardBasic';
 
 const FilteredProducts = () => {
   const location = useLocation();
-  const productsData = location.state.products;
-  console.log('***********', productsData);
+  const { products } = location.state;
   const [offset, setOffset] = useState<number>(0);
 
-  const textReturn = productsData.length > 1 ? 'items' : 'item';
+  const textReturn = products.length > 1 ? 'items' : 'item';
 
   return (
-    <Box>
-      <Typography>
-        Sua busca retornou {productsData.length} {textReturn}
-      </Typography>
-      <CardBasic
-        products={productsData}
-        totalProducts={productsData.length}
-        setOffset={setOffset}
-      />
+    <Box minHeight={'51vh'}>
+      {!!products.length ? (
+        <>
+          <Box>
+            <Typography variant="h4" pt={5} textAlign="center">
+              Sua busca retornou {products.length} {textReturn}
+            </Typography>
+            <CardBasic
+              products={products}
+              totalProducts={products.length}
+              setOffset={setOffset}
+            />
+          </Box>
+        </>
+      ) : (
+        <Box>
+          <Typography variant="h4" pt={10} textAlign="center">
+            Não encontramos nenhum resultado para sua busca
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };

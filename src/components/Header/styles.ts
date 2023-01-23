@@ -22,7 +22,7 @@ export const ContainerSearch = styled.div`
   display: flex;
   align-items: center;
   width: 70%;
-  `;
+`;
 
 export const BoxSearch = styled.form`
   display: flex;

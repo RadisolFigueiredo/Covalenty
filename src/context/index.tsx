@@ -1,13 +1,18 @@
 import { CategoryContextProvider } from './categories';
 import { ProductContextProvider } from './products';
 
-const GlobalContext = ({ children }: any) => {
+export const CategoryContext = ({ children }: any) => {
   return (
     <>
       <CategoryContextProvider>{children}</CategoryContextProvider>
-      <ProductContextProvider>{children}</ProductContextProvider>
     </>
   );
 };
 
-export default GlobalContext;
+export const ProductContext = ({ children }: any) => {
+  return (
+    <>
+      <ProductContextProvider>{children}</ProductContextProvider>
+    </>
+  );
+};

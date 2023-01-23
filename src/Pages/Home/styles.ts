@@ -63,3 +63,21 @@ export const BoxCarousel = styled.div`
 export const WidthCarousel = styled.div`
   width: 70%;
 `;
+
+export const ContainerBody = styled(Box)`
+  display: flex;
+  justify-content: center;
+  min-height: 180vh;
+  @media (max-width: 1151px) {
+    height: 660vh;
+  }
+  @media (min-width: 1152px) {
+    height: 350vh;
+  }
+  @media (min-width: 1727px) {
+    height: 260vh;
+  }
+  @media (min-width: 2303px) {
+    height: 180vh;
+  }
+`;

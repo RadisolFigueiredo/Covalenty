@@ -68,12 +68,12 @@ const Home = () => {
           </S.WidthCarousel>
         </S.BoxCarousel>
       </S.ContainerCarousel>
-      <Box display="flex" justifyContent="center" height="50vh">
+      <S.ContainerBody>
         <Box width="70%" flexDirection="column">
           <Typography
             display="flex"
             justifyContent="center"
-            my={5}
+            py={5}
             variant="h4"
             color="#213058"
           >
@@ -91,7 +91,7 @@ const Home = () => {
               <CardCircle key={item.id} item={item} />
             ))}
           </Box>
-          <Box height="100vh" py={10}>
+          <Box  py={10}>
             <Typography
               display="flex"
               justifyContent="center"
@@ -108,7 +108,7 @@ const Home = () => {
             />
           </Box>
         </Box>
-      </Box>
+      </S.ContainerBody>
     </Box>
   );
 };

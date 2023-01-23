@@ -1,32 +1,33 @@
 import { Search, ShoppingBagOutlined } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProductContext from '../../context/products';
 import { api } from '../../services/api';
 import Navbar from '../Navbar';
 
 import * as S from './styles';
 
 const Header = () => {
-  const { allProducts } = useContext(ProductContext);
   const navigate = useNavigate();
 
   const [search, setSearch] = useState('');
 
   async function handleSubmit(e: any) {
+    e.preventDefault();
     try {
       const { data } = await api.get(`products/?title=${search}`);
+      resetItems();
       navigate('/filtered-product', {
         state: { products: data },
       });
-      setSearch('');
     } catch (err) {
-      setSearch('');
-
       console.log('ERROR:', err);
     }
   }
+
+  const resetItems = () => {
+    setSearch('');
+  };
 
   return (
     <Box height="19vh">
@@ -45,7 +46,7 @@ const Header = () => {
         </Typography>
       </Box>
       <S.Container>
-        <S.BoxAlign to={'/'}>
+        <S.BoxAlign to={'/'} onClick={() => resetItems()}>
           <Typography color="#ffffff" variant="h5">
             Platzi Shop
           </Typography>
@@ -56,6 +57,7 @@ const Header = () => {
             <S.Input
               type="text"
               name="search"
+              value={search}
               id="search"
               placeholder="Buscar"
               onChange={(e) => setSearch(e.target.value)}
