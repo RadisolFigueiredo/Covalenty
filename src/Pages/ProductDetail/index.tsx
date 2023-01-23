@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
+import { formatPrice } from '../../utils/formatCurrent';
 
 const ProductDetails = () => {
   const location = useLocation();
@@ -27,9 +28,6 @@ const ProductDetails = () => {
     getProductDetail();
   }, [productId]);
 
-  console.log(!!product);
-  console.log(product);
-
   return (
     <Box
       display="flex"
@@ -49,13 +47,25 @@ const ProductDetails = () => {
                 width="500"
               />
               <Box display="flex" flexDirection="column">
-                <Typography pl={3} pb={2} fontWeight={700} variant="h4">
+                <Typography
+                  pl={3}
+                  pb={2}
+                  fontWeight={700}
+                  variant="h4"
+                  color="#213058"
+                >
                   {product.title}
                 </Typography>
-                <Typography pb={2} fontWeight={700} pl={3} variant="subtitle1">
-                  {product.price}
+                <Typography
+                  pb={2}
+                  fontWeight={700}
+                  pl={3}
+                  variant="subtitle1"
+                  color="#213058"
+                >
+                  {formatPrice(product.price)}
                 </Typography>
-                <Typography variant="subtitle1" px={3}>
+                <Typography variant="subtitle1" px={3} color="#213058">
                   {product.description}
                 </Typography>
               </Box>

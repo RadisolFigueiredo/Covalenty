@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+
 import {
   Box,
   Card,
@@ -6,10 +8,7 @@ import {
   CardContent,
   Typography,
 } from '@mui/material';
-import { useContext } from 'react';
 
-import { useNavigate } from 'react-router-dom';
-import CategoryContext from '../../../context/categories';
 import { api } from '../../../services/api';
 
 const CardCircle = ({ item }: any) => {
@@ -58,7 +57,7 @@ const CardCircle = ({ item }: any) => {
         </CardActionArea>
       </Card>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography gutterBottom variant="h5" component="div" color="#213058">
           {item.name}
         </Typography>
       </CardContent>

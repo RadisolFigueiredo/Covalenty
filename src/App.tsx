@@ -9,6 +9,7 @@ import Home from './Pages/Home';
 import Categories from './Pages/Categories';
 import Tracking from './Pages/Tracking';
 import ProductDetails from './Pages/ProductDetail';
+import FilteredProducts from './Pages/FilteredProducts';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/tracking" element={<Tracking />} />
         <Route path="/deliveryTime" element={<Tracking />} />
         <Route path="/product-detail/:id" element={<ProductDetails />} />
+        <Route path="/filtered-product" element={<FilteredProducts />} />
       </Routes>
       <Footer />
     </GlobalContext>

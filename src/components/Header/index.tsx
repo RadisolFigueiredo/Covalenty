@@ -1,14 +1,33 @@
 import { Search, ShoppingBagOutlined } from '@mui/icons-material';
 import { Box, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ProductContext from '../../context/products';
+import { api } from '../../services/api';
 import Navbar from '../Navbar';
 
 import * as S from './styles';
 
 const Header = () => {
+  const { allProducts } = useContext(ProductContext);
+  const navigate = useNavigate();
+
   const [search, setSearch] = useState('');
 
-  console.log(search);
+  async function handleSubmit(e: any) {
+    try {
+      const { data } = await api.get(`products/?title=${search}`);
+      navigate('/filtered-product', {
+        state: { products: data },
+      });
+      setSearch('');
+    } catch (err) {
+      setSearch('');
+
+      console.log('ERROR:', err);
+    }
+  }
+
   return (
     <Box height="19vh">
       <Box
@@ -33,7 +52,7 @@ const Header = () => {
         </S.BoxAlign>
 
         <S.ContainerSearch>
-          <S.BoxSearch>
+          <S.BoxSearch onSubmit={handleSubmit}>
             <S.Input
               type="text"
               name="search"

@@ -58,10 +58,10 @@ const CardBasic = ({ products, totalProducts, setOffset }: any) => {
                 height="190px"
               />
               <Box padding={1}>
-                <Typography variant="body1" fontSize={18}>
+                <Typography variant="body1" fontSize={18} color="#213058">
                   {item.title}
                 </Typography>
-                <Typography variant="body2" fontSize={18}>
+                <Typography variant="body2" fontSize={18} color="#213058">
                   {formatPrice(item.price)}
                 </Typography>
               </Box>

@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material';
 import { api } from '../../services/api';
 
 import CategoryContext from '../../context/categories';
+import ProductContext from '../../context/products';
 
 import Carousel from '../../components/Carousel';
 import CardCircle from '../../components/Cards/CardCircle';
@@ -14,6 +15,7 @@ import * as S from './styles';
 
 const Home = () => {
   const { setMainCategories, mainCategories } = useContext(CategoryContext);
+  const { setAllProducts } = useContext(ProductContext);
 
   const [offset, setOffset] = useState<number>(0);
   const [products, setProducts] = useState<any>([]);
@@ -23,6 +25,7 @@ const Home = () => {
     try {
       const response = await api.get('products');
       setTotalProducts(response.data);
+      setAllProducts(response.data);
     } catch (error) {
       console.log('ERROR:', error);
     }
@@ -57,13 +60,13 @@ const Home = () => {
 
   return (
     <Box height="250vh">
-      <S.ContainerCarousel>
+      {/* <S.ContainerCarousel>
         <S.BoxCarousel>
           <S.WidthCarousel>
             <Carousel />
           </S.WidthCarousel>
         </S.BoxCarousel>
-      </S.ContainerCarousel>
+      </S.ContainerCarousel> */}
       <Box display="flex" justifyContent="center" height="50vh">
         <Box width="70%" flexDirection="column">
           <Typography
@@ -71,8 +74,9 @@ const Home = () => {
             justifyContent="center"
             my={5}
             variant="h4"
+            color="#213058"
           >
-            Categorias
+            CATEGORIAS
           </Typography>
 
           <Box
@@ -92,6 +96,7 @@ const Home = () => {
               justifyContent="center"
               my={5}
               variant="h4"
+              color="#213058"
             >
               NOSSOS PRODUTOS
             </Typography>
