@@ -7,12 +7,13 @@ import { api } from '../../services/api';
 import CategoryContext, { CategoryType } from '../../context/categories';
 import ProductContext from '../../context/products';
 
+import { Product } from '../../types/product';
+
 import Carousel from '../../components/Carousel';
 import CardCircle from '../../components/Cards/CardCircle';
 import CardBasic from '../../components/Cards/CardBasic';
 
 import * as S from './styles';
-import { Product } from '../../types/product';
 
 const Home = () => {
   const { setMainCategories, mainCategories } = useContext(CategoryContext);
@@ -91,7 +92,7 @@ const Home = () => {
               <CardCircle key={item.id} item={item} />
             ))}
           </Box>
-          <Box  py={10}>
+          <Box py={10}>
             <Typography
               display="flex"
               justifyContent="center"

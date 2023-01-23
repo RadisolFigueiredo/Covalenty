@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
-
 import { Typography, Box, Button } from '@mui/material';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
 
@@ -11,8 +10,9 @@ import { autoPlay } from 'react-swipeable-views-utils';
 
 import { Category } from '../../types/category';
 
-import * as S from './styles';
 import CategoryContext from '../../context/categories';
+
+import * as S from './styles';
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -58,7 +58,7 @@ const Carousel = () => {
                       src={step.image}
                       alt={step.name}
                     />
-                    <S.BoxText m={2} width={'40%'}>
+                    <S.BoxText m={2} width="40%">
                       <Typography
                         variant="h4"
                         color="#ffffff"

@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
-import { useLocation } from 'react-router-dom';
+
+import { Product } from '../../types/product';
+
 import CardBasic from '../../components/Cards/CardBasic';
 
 const Categories = () => {
@@ -12,7 +15,7 @@ const Categories = () => {
   const totalProducts = location.state.totalProducts;
 
   const [offset, setOffset] = useState<number>(0);
-  const [products, setProducts] = useState<any>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const categoryName = products[0]?.category?.name;
 
   const getProducts = async () => {

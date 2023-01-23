@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { useLocation } from 'react-router-dom';
 import CardBasic from '../../components/Cards/CardBasic';
@@ -6,7 +5,6 @@ import CardBasic from '../../components/Cards/CardBasic';
 const FilteredProducts = () => {
   const location = useLocation();
   const { products } = location.state;
-  const [offset, setOffset] = useState<number>(0);
 
   const textReturn = products.length > 1 ? 'items' : 'item';
 
@@ -18,11 +16,7 @@ const FilteredProducts = () => {
             <Typography variant="h4" pt={5} textAlign="center">
               Sua busca retornou {products.length} {textReturn}
             </Typography>
-            <CardBasic
-              products={products}
-              totalProducts={products.length}
-              setOffset={setOffset}
-            />
+            <CardBasic products={products} />
           </Box>
         </>
       ) : (

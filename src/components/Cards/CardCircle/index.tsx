@@ -10,8 +10,13 @@ import {
 } from '@mui/material';
 
 import { api } from '../../../services/api';
+import { CategoryType } from '../../../context/categories';
 
-const CardCircle = ({ item }: any) => {
+type PropsCardCircle = {
+  item: CategoryType;
+};
+
+const CardCircle = ({ item }: PropsCardCircle) => {
   const navigate = useNavigate();
 
   const getProductsByCategory = async () => {
