@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
-import { Category } from '../../types/category';
 
 import Carousel from '../../components/Carousel';
 import CardCircle from '../../components/Cards/CardCircle';
