@@ -3,12 +3,13 @@ import { useState, useEffect } from 'react';
 import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import React from 'react';
 import Pagination from '../../components/Pagination';
 
 const Categories = () => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const category = location.state.category;
   const totalProducts = location.state.totalProducts;
@@ -33,7 +34,7 @@ const Categories = () => {
 
   useEffect(() => {
     getProducts();
-  }, [offset,category.id]);
+  }, [offset, category.id]);
 
   const handleChange = (e: React.ChangeEvent<unknown>, p: number) => {
     if (p > page) {
@@ -45,6 +46,10 @@ const Categories = () => {
         setPage(page - 1);
       }
     }
+  };
+
+  const handleDetail = (id: number) => {
+    return navigate(`/product-detail/${id}`, { state: { productId: id } });
   };
 
   return (
@@ -65,8 +70,21 @@ const Categories = () => {
           width="70%"
         >
           {products?.map((item: any) => (
-            <Box key={item.id} mx={2} mb={5} width="250px" height="300px">
-              <img src={item.images[0]} alt={item.title} width="100%" height='190px'/>
+            <Box
+              key={item.id}
+              mx={2}
+              mb={5}
+              width="250px"
+              height="300px"
+              onClick={() => handleDetail(item.id)}
+              sx={{ cursor: 'pointer' }}
+            >
+              <img
+                src={item.images[0]}
+                alt={item.title}
+                width="100%"
+                height="190px"
+              />
               <Box padding={1}>
                 <Typography>{item.title}</Typography>
                 <Typography>{item.price}</Typography>
