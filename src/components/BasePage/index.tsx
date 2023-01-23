@@ -18,10 +18,10 @@ const BasePage = ({ title, text }: BasePageProps) => {
         flexDirection="column"
         alignItems={'center'}
       >
-        <Typography mt={6} variant="h3">
+        <Typography mt={6} variant="h3" color="#213058" fontWeight={700}>
           {title}
         </Typography>
-        <Typography m={5} variant="body2">
+        <Typography m={5} variant="subtitle1" color="#213058" textAlign='justify'>
           {text}
         </Typography>
       </Box>

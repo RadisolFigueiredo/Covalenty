@@ -7,7 +7,7 @@ import Header from './components/Header';
 
 import Home from './Pages/Home';
 import Categories from './Pages/Categories';
-import Tracking from './Pages/Tracking';
+import Generic from './Pages/Generic';
 import ProductDetails from './Pages/ProductDetail';
 import FilteredProducts from './Pages/FilteredProducts';
 
@@ -18,8 +18,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/products/:id" element={<Categories />} />
-        <Route path="/tracking" element={<Tracking />} />
-        <Route path="/deliveryTime" element={<Tracking />} />
+        <Route path="/tracking" element={<Generic />} />
+        <Route path="/deliveryTime" element={<Generic />} />
         <Route path="/product-detail/:id" element={<ProductDetails />} />
         <Route path="/filtered-product" element={<FilteredProducts />} />
       </Routes>

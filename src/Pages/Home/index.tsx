@@ -59,14 +59,14 @@ const Home = () => {
   }, [offset]);
 
   return (
-    <Box height="250vh">
-      {/* <S.ContainerCarousel>
+    <Box>
+      <S.ContainerCarousel>
         <S.BoxCarousel>
           <S.WidthCarousel>
             <Carousel />
           </S.WidthCarousel>
         </S.BoxCarousel>
-      </S.ContainerCarousel> */}
+      </S.ContainerCarousel>
       <Box display="flex" justifyContent="center" height="50vh">
         <Box width="70%" flexDirection="column">
           <Typography
