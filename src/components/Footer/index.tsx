@@ -68,13 +68,12 @@ const Footer = () => {
   return (
     <Box
       sx={{
-        height: '300px',
+        height: '30vh',
         backgroundColor: '#28696a',
         width: '100%',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-around',
-        alignItems: 'center',
       }}
     >
       <Box

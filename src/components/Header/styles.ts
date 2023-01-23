@@ -1,4 +1,5 @@
 import { Box } from '@mui/material';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.div`
@@ -8,11 +9,13 @@ export const Container = styled.div`
   height: 100px;
 `;
 
-export const BoxAlign = styled.div`
+export const BoxAlign = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 10%;
+  cursor: pointer;
+  text-decoration: none;
 `;
 
 export const ContainerSearch = styled.div`

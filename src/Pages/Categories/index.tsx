@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 
-import { Box, Typography, Pagination } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
 import { useLocation } from 'react-router-dom';
 import React from 'react';
+import Pagination from '../../components/Pagination';
 
 const Categories = () => {
   const location = useLocation();
@@ -32,11 +33,9 @@ const Categories = () => {
 
   useEffect(() => {
     getProducts();
-  }, [offset]);
+  }, [offset,category.id]);
 
   const handleChange = (e: React.ChangeEvent<unknown>, p: number) => {
-    console.log(e, p);
-
     if (p > page) {
       setOffset((p - 2) * 12 + 12);
       setPage(page + 1);
@@ -49,55 +48,42 @@ const Categories = () => {
   };
 
   return (
-    <Box
-      sx={{
-        height: '100%',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '50px',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <>
       <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          width: '70%',
-        }}
+        width="100%"
+        display="flex"
+        justifyContent="center"
+        mt="50px"
+        flexDirection="column"
+        alignItems="center"
       >
-        {products?.map((item: any) => (
-          <Box
-            key={item.id}
-            sx={{
-              width: '250px',
-              height: '300px',
-              marginBottom: '20px',
-            }}
-          >
-            <img src={item.images[1]} alt={item.title} width="100%" />
-            <Box padding={1}>
-              <Typography>{item.title}</Typography>
-              <Typography>{item.price}</Typography>
+        <Box
+          display="flex"
+          justifyContent="center"
+          flexDirection="row"
+          flexWrap="wrap"
+          width="70%"
+        >
+          {products?.map((item: any) => (
+            <Box key={item.id} mx={2} mb={5} width="250px" height="300px">
+              <img src={item.images[0]} alt={item.title} width="100%" height='190px'/>
+              <Box padding={1}>
+                <Typography>{item.title}</Typography>
+                <Typography>{item.price}</Typography>
+              </Box>
             </Box>
-          </Box>
-        ))}
+          ))}
+        </Box>
       </Box>
       {totalProducts > 12 && (
-        <Box sx={{ marginY: 5 }}>
+        <Box my={5} width="100%" display="flex" justifyContent="center">
           <Pagination
             count={Math.ceil(totalProducts / 12)}
-            color="primary"
-            onChange={handleChange}
-            shape="rounded"
-            // page={Number(page)}
+            onChange={(e, value) => handleChange(e, value)}
           />
         </Box>
       )}
-    </Box>
+    </>
   );
 };
 export default Categories;
