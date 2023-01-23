@@ -1,9 +1,16 @@
 import { Box, Pagination, Typography } from '@mui/material';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Product } from '../../../types/product';
 import { formatPrice } from '../../../utils/formatCurrent';
 
-const CardBasic = ({ products, totalProducts, setOffset }: any) => {
+type PaginationType = {
+  products: Product[];
+  totalProducts: number;
+  setOffset: (value: number) => void;
+};
+
+const CardBasic = ({ products, totalProducts, setOffset }: PaginationType) => {
   const navigate = useNavigate();
 
   const [page, setPage] = useState(0);
@@ -41,7 +48,7 @@ const CardBasic = ({ products, totalProducts, setOffset }: any) => {
           flexWrap="wrap"
           width="70%"
         >
-          {products?.map((item: any) => (
+          {products?.map((item: Product) => (
             <Box
               key={item.id}
               mx={2}

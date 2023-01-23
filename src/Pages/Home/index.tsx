@@ -4,7 +4,7 @@ import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
 
-import CategoryContext from '../../context/categories';
+import CategoryContext, { CategoryType } from '../../context/categories';
 import ProductContext from '../../context/products';
 
 import Carousel from '../../components/Carousel';
@@ -12,14 +12,15 @@ import CardCircle from '../../components/Cards/CardCircle';
 import CardBasic from '../../components/Cards/CardBasic';
 
 import * as S from './styles';
+import { Product } from '../../types/product';
 
 const Home = () => {
   const { setMainCategories, mainCategories } = useContext(CategoryContext);
   const { setAllProducts } = useContext(ProductContext);
 
   const [offset, setOffset] = useState<number>(0);
-  const [products, setProducts] = useState<any>([]);
-  const [totalProducts, setTotalProducts] = useState<any>([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [totalProducts, setTotalProducts] = useState<Product[]>([]);
 
   const getAllProducts = async () => {
     try {
@@ -86,7 +87,7 @@ const Home = () => {
             flexDirection="row"
             flexWrap="wrap"
           >
-            {mainCategories?.map((item: any) => (
+            {mainCategories?.map((item: CategoryType) => (
               <CardCircle key={item.id} item={item} />
             ))}
           </Box>
