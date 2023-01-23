@@ -74,3 +74,39 @@ export const BoxCarousel = styled.div`
 export const WidthCarousel = styled.div`
   width: 70%;
 `;
+
+interface FavoriteProps {
+  $hasFavorite: boolean;
+}
+
+export const BoxIconFavorites = styled(Link)<FavoriteProps>`
+  text-decoration: none;
+  color: ${({ $hasFavorite }) => ($hasFavorite ? 'red' : '#f0e6d7')};
+  margin-right: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  cursor: pointer;
+`;
+
+export const ChipFavoriteLength = styled.div<FavoriteProps>`
+  border: 1px solid transparent;
+  background-color: #f0e6d7;
+  width: 18px;
+  height: 20px;
+  border-radius: 30px;
+  position: absolute;
+  top: 50px;
+  right: -4px;
+  margin-right: 130px;
+  display: ${({ $hasFavorite }) => ($hasFavorite ? '' : 'none')}; ;
+`;
+export const ProductInCartLength = styled.p`
+  color: #213058;
+  font-size: 14px;
+  font-weight: 500;
+  position: absolute;
+  top: -13px;
+  right: 5px;
+`;

@@ -16,6 +16,9 @@ export type ProductType = {
 interface ProductContextType {
   allProducts: ProductType[];
   setAllProducts: (products: ProductType[]) => void;
+  favoritesProducts: ProductType[];
+  addFavorite: (product: ProductType) => void;
+  removeFavorite: (productId: number) => void;
 }
 
 interface PropsCategoryContext {
@@ -27,16 +30,34 @@ const initialState: ProductType[] = [];
 const ProductContext = createContext<ProductContextType>({
   allProducts: initialState,
   setAllProducts: (products: ProductType[]) => {},
+  favoritesProducts: initialState,
+  addFavorite: (product: ProductType) => {},
+  removeFavorite: (productId: number) => {},
 });
 
 const ProductContextProvider = ({ children }: PropsCategoryContext) => {
   const [allProducts, setAllProducts] = useState<ProductType[]>(initialState);
+  const [favoritesProducts, setFavoritesProducts] =
+    useState<ProductType[]>(initialState);
+
+  const addFavorite = (product: ProductType) => {
+    setFavoritesProducts([...favoritesProducts, product]);
+  };
+
+  const removeFavorite = (productId: number) => {
+    setFavoritesProducts(
+      favoritesProducts.filter((item) => productId !== item.id)
+    );
+  };
 
   return (
     <ProductContext.Provider
       value={{
         allProducts,
         setAllProducts,
+        favoritesProducts,
+        addFavorite,
+        removeFavorite,
       }}
     >
       {children}

@@ -1,15 +1,21 @@
-import { Search, ShoppingBagOutlined } from '@mui/icons-material';
-import { Box, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { Box, Typography } from '@mui/material';
+import { Search } from '@mui/icons-material';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
 import { api } from '../../services/api';
+
+import ProductContext from '../../context/products';
+
 import Navbar from '../Navbar';
 
 import * as S from './styles';
 
 const Header = () => {
   const navigate = useNavigate();
-
+  const { favoritesProducts } = useContext(ProductContext);
   const [search, setSearch] = useState('');
 
   async function handleSubmit(e: any) {
@@ -68,9 +74,17 @@ const Header = () => {
           </S.BoxSearch>
         </S.ContainerSearch>
 
-        <S.BoxAlign to={'/'}>
-          <ShoppingBagOutlined style={{ color: '#ffffff' }} />
-        </S.BoxAlign>
+        <S.BoxIconFavorites
+          to={'/favorites'}
+          $hasFavorite={!!favoritesProducts.length}
+        >
+          <FavoriteIcon fontSize="large" />
+          <S.ChipFavoriteLength $hasFavorite={!!favoritesProducts.length}>
+            <S.ProductInCartLength>
+              {favoritesProducts.length}
+            </S.ProductInCartLength>
+          </S.ChipFavoriteLength>
+        </S.BoxIconFavorites>
       </S.Container>
 
       <S.ContainerNavbar

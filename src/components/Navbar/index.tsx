@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
-
 import { Link, useNavigate } from 'react-router-dom';
 
 import { Box, IconButton, Menu, MenuItem, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import CategoryContext from '../../context/categories';
+
 import { api } from '../../services/api';
+import CategoryContext, { CategoryType } from '../../context/categories';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Navbar = () => {
     setAnchorEl(null);
   };
 
-  const handleCategory = async (item: any) => {
+  const handleCategory = async (item: CategoryType) => {
     try {
       const response = await api.get(`categories/${item.id}/products
       `);

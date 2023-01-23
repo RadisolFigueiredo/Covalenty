@@ -10,6 +10,7 @@ import Categories from './Pages/Categories';
 import Generic from './Pages/Generic';
 import ProductDetails from './Pages/ProductDetail';
 import FilteredProducts from './Pages/FilteredProducts';
+import { FavoritesProducts } from './Pages/FavoritesProducts';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/deliveryTime" element={<Generic />} />
             <Route path="/product-detail/:id" element={<ProductDetails />} />
             <Route path="/filtered-product" element={<FilteredProducts />} />
+            <Route path="/favorites" element={<FavoritesProducts />} />
           </Routes>
         </ProductContext>
       </CategoryContext>
