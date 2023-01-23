@@ -14,7 +14,6 @@ import { api } from '../../../services/api';
 
 const CardCircle = ({ item }: any) => {
   const navigate = useNavigate();
-  const { setAllProductByCategory } = useContext(CategoryContext);
 
   const getProductsByCategory = async () => {
     try {
@@ -22,8 +21,6 @@ const CardCircle = ({ item }: any) => {
       `);
 
       if (response.status === 200) {
-        setAllProductByCategory(response.data);
-
         return navigate(`/products/${item.id}`, {
           state: { category: item, totalProducts: response.data.length },
         });

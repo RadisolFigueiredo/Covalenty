@@ -1,27 +1,41 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
 
 import { api } from '../../services/api';
 
+import CategoryContext from '../../context/categories';
+
 import Carousel from '../../components/Carousel';
 import CardCircle from '../../components/Cards/CardCircle';
+import CardBasic from '../../components/Cards/CardBasic';
 
 import * as S from './styles';
-import CategoryContext from '../../context/categories';
 
 const Home = () => {
   const { setMainCategories, mainCategories } = useContext(CategoryContext);
-  // const [categories, setCategories] = useState<Category[] | any>();
 
-  // const getProducts = async () => {
-  //   try {
-  //     const response = await api.get('products');
-  //     // console.log('PRODUTOS', response.data);
-  //   } catch (error) {
-  //     console.log('ERROR:', error);
-  //   }
-  // };
+  const [offset, setOffset] = useState<number>(0);
+  const [products, setProducts] = useState<any>([]);
+  const [totalProducts, setTotalProducts] = useState<any>([]);
+
+  const getAllProducts = async () => {
+    try {
+      const response = await api.get('products');
+      setTotalProducts(response.data);
+    } catch (error) {
+      console.log('ERROR:', error);
+    }
+  };
+
+  const getProducts = async () => {
+    try {
+      const response = await api.get(`products?offset=${offset}&limit=12`);
+      setProducts(response.data);
+    } catch (error) {
+      console.log('ERROR:', error);
+    }
+  };
 
   const getCategories = async () => {
     try {
@@ -33,12 +47,16 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // getProducts();
     getCategories();
+    getAllProducts();
   }, []);
 
+  useEffect(() => {
+    getProducts();
+  }, [offset]);
+
   return (
-    <>
+    <Box height="250vh">
       <S.ContainerCarousel>
         <S.BoxCarousel>
           <S.WidthCarousel>
@@ -46,19 +64,8 @@ const Home = () => {
           </S.WidthCarousel>
         </S.BoxCarousel>
       </S.ContainerCarousel>
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          height: '50vh',
-        }}
-      >
-        <Box
-          sx={{
-            width: '70%',
-            flexDirection: 'column',
-          }}
-        >
+      <Box display="flex" justifyContent="center" height="50vh">
+        <Box width="70%" flexDirection="column">
           <Typography
             display="flex"
             justifyContent="center"
@@ -69,21 +76,34 @@ const Home = () => {
           </Typography>
 
           <Box
-            sx={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'space-around',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}
+            width="100%"
+            display="flex"
+            justifyContent="space-around"
+            flexDirection="row"
+            flexWrap="wrap"
           >
             {mainCategories?.map((item: any) => (
               <CardCircle key={item.id} item={item} />
             ))}
           </Box>
+          <Box height="100vh" py={10}>
+            <Typography
+              display="flex"
+              justifyContent="center"
+              my={5}
+              variant="h4"
+            >
+              NOSSOS PRODUTOS
+            </Typography>
+            <CardBasic
+              products={products}
+              totalProducts={totalProducts.length}
+              setOffset={setOffset}
+            />
+          </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
